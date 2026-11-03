@@ -37,6 +37,8 @@ Known dilution result, event sequencing, buyback bounds, invalid inputs and JSON
 
 Source: `src/`, `test/`, `site/` and `scripts/`. The independent static site is built to `docs/`, with English/Japanese equivalents, canonical/hreflang links, sitemap, robots, CNAME and .nojekyll. Its hostname is https://filings.optmodel.com. Each repository is self-contained; no sibling directory is needed to build.
 
+GitHub hosts the public source code; the live educational website is deployed on Vercel. Legacy GitHub Pages settings and compatibility files are retained, not the current production hosting choice.
+
 ## Limits
 
 Fixed holder shares and fixed period income. Period-end shares, not a weighted average. Full exercise is not treasury-stock accounting. No anti-dilution rules, tax effects or earnings adjustments: NOT statutory diluted EPS. Currency is a label, not FX conversion. Safe-integer share inputs; floating-point results. No market data or investment advice.
