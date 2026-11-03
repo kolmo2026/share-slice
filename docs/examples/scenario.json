@@ -1,0 +1,10 @@
+{
+  "shares": 100000000,
+  "holding": 1000000,
+  "income": 20000000,
+  "currency": "USD",
+  "events": [
+    { "type": "issue", "shares": 10000000 },
+    { "type": "rsu", "shares": 5000000 }
+  ]
+}

@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { calculate, example } from '../src/calculate.js';
+const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-8, `${a} != ${b}`);
+test('15% share growth is 13.043478% ownership dilution', () => { const result = calculate(example).rows.at(-1); assert.equal(result.shares, 115000000); near(result.ownershipPct, 0.8695652173913043); near(result.simpleEps, 0.17391304347826086); near(result.shareGrowthPct, 15); near(result.ownershipDilutionPct, 13.043478260869565); near(result.ownershipChangePp, 0.13043478260869568); });
+test('zero events and JSON roundtrip', () => { const input = { ...example, events: [] }; assert.equal(calculate(input).rows.length, 1); assert.deepEqual(calculate(JSON.parse(JSON.stringify(example))), calculate(example)); });
+test('sequential exercise and buyback; negative income allowed', () => { const result = calculate({ shares: 100, holding: 10, income: -20, events: [{ type: 'exercise', shares: 20 }, { type: 'buyback', shares: 10 }] }); assert.deepEqual(result.rows.map(x => x.shares), [100, 120, 110]); near(result.rows.at(-1).simpleEps, -20 / 110); });
+test('buyback can remove all other shares, but not held shares or all shares', () => { assert.equal(calculate({ shares: 100, holding: 10, income: 1, events: [{ type: 'buyback', shares: 90 }] }).rows.at(-1).shares, 10); assert.throws(() => calculate({ shares: 100, holding: 10, income: 1, events: [{ type: 'buyback', shares: 91 }] })); assert.throws(() => calculate({ shares: 100, holding: 0, income: 1, events: [{ type: 'buyback', shares: 100 }] })); });
+test('invalid inputs rejected', () => { for (const patch of [{ shares: 0 }, { holding: -1 }, { holding: 200000000 }, { income: Infinity }, { events: [{ type: 'issue', shares: -1 }] }, { events: [{ type: 'unknown', shares: 1 }] }]) assert.throws(() => calculate({ ...example, ...patch })); });
