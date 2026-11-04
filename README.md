@@ -35,21 +35,19 @@ npm run build
 
 Known dilution result, event sequencing, buyback bounds, invalid inputs and JSON roundtrip.
 
-Source: `src/`, `test/`, `site/` and `scripts/`. The independent static site is built to `docs/`, with English/Japanese equivalents, canonical/hreflang links, sitemap, robots, CNAME and .nojekyll. Its hostname is https://filings.optmodel.com. Each repository is self-contained; no sibling directory is needed to build.
+Source: `src/`, `test/`, `site/` and `scripts/`. The static site is built to `docs/`, with English/Japanese equivalents, canonical/hreflang links, sitemap, robots, CNAME and .nojekyll. Its hostname is https://filings.optmodel.com. Each repository is self-contained; no sibling directory is needed to build.
 
-GitHub hosts the public source code; the live educational website is deployed on Vercel. Legacy GitHub Pages settings and compatibility files are retained, not the current production hosting choice.
 
 ## Limits
 
 Fixed holder shares and fixed period income. Period-end shares, not a weighted average. Full exercise is not treasury-stock accounting. No anti-dilution rules, tax effects or earnings adjustments: NOT statutory diluted EPS. Currency is a label, not FX conversion. Safe-integer share inputs; floating-point results. No market data or investment advice.
 
-## Privacy and related products
+## Privacy and tools
 
 No account, analytics, backend or document-upload endpoint. Calculations/file operations run locally. Public site assets still load over the network; browser dependencies are bundled rather than fetched from a runtime CDN. JSON exports are plain text; review filenames and assumptions before sharing.
 
 [Eqvero](https://eqvero.com/) — public-disclosure research, separate from this arithmetic utility.
 
-Maintained via GitHub account **kolmo2026**, by the same maintenance team developing tools for the Eqvero/KolmoPDF/KomoPDF ecosystem. This is not an independent review or third-party endorsement. KolmoPDF's cloud services upload documents and are distinct from these local tools.
 
 ## License
 
